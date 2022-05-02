@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveFunctor, FlexibleInstances, GADTs,
-    OverloadedStrings, RankNTypes, RecordWildCards, DefaultSignatures #-}
+    OverloadedStrings, RankNTypes, RecordWildCards, DefaultSignatures,
+    DeriveGeneric #-}
 
 -- |
 -- Module      : Network.Wreq.Internal.Types
@@ -58,6 +59,7 @@ import Prelude hiding (head)
 import qualified Data.ByteString.Char8 as S
 import qualified Data.ByteString.Lazy as L
 import qualified Network.HTTP.Client as HTTP
+import GHC.Generics (Generic)
 
 -- | A MIME content type, e.g. @\"application/octet-stream\"@.
 type ContentType = S.ByteString
@@ -158,7 +160,7 @@ data Options = Options {
   -- This defaults to 'Nothing', which will just use the default of
   -- 'Network.HTTP.Client.Request' which throws a 'StatusException' if
   -- the status is not 2XX.
-  } deriving (Typeable)
+  } deriving (Typeable, Generic)
 
 -- | A function that checks the result of a HTTP request and
 -- potentially throw an exception.
@@ -303,7 +305,7 @@ data Session = Session {
     , seshManager :: Manager
     , seshRun :: Session -> Run Body -> Run Body
     , seshRunHistory :: Session -> RunHistory Body -> RunHistory Body
-    }
+    } deriving (Generic)
 
 instance Show Session where
     show _ = "Session"

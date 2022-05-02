@@ -95,7 +95,6 @@ library
     Network.Wreq.Internal.Link
     Network.Wreq.Internal.OAuth1
     Network.Wreq.Internal.Types
-    Network.Wreq.Lens.Machinery
     Network.Wreq.Lens.TH
     Paths_wreq
   build-depends:
@@ -110,6 +109,7 @@ library
     containers,
     cryptonite,
     exceptions >= 0.5,
+    generic-lens >= 2.2,
     ghc-prim,
     hashable,
     http-client >= 0.6,
